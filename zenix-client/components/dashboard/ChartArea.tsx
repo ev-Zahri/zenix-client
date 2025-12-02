@@ -9,9 +9,9 @@ export const ChartArea = () => {
   const [selectedTimeframe, setSelectedTimeframe] = useState('1H');
 
   return (
-    <div className="flex-1 bg-[#181f2d] rounded-xl flex flex-col p-4 min-h-0">
+    <div className="flex-1 bg-panel-dark rounded-xl flex flex-col p-4 min-h-0">
       {/* Toolbar */}
-      <div className="flex justify-between gap-2 border-b border-[#101622] pb-3 mb-3">
+      <div className="flex justify-between gap-2 border-b border-background-dark pb-3 mb-3">
         <div className="flex items-center gap-2">
           {timeframes.map((tf) => (
             <button
@@ -19,18 +19,18 @@ export const ChartArea = () => {
               onClick={() => setSelectedTimeframe(tf)}
               className={`px-3 py-1 text-sm rounded-md ${
                 selectedTimeframe === tf
-                  ? 'bg-[#101622] text-[#00BFFF] font-semibold'
-                  : 'text-gray-400 hover:bg-[#101622]'
+                  ? 'bg-background-dark text-accent-blue font-semibold'
+                  : 'text-gray-400 hover:bg-background-dark'
               }`}
             >
               {tf}
             </button>
           ))}
-          <div className="w-px h-6 bg-[#101622] mx-2" />
-          <button className="p-2 rounded-md hover:bg-[#101622] text-gray-400">
+          <div className="w-px h-6 bg-background-dark mx-2" />
+          <button className="p-2 rounded-md hover:bg-background-dark text-gray-400">
             <span className="material-symbols-outlined text-base">candlestick_chart</span>
           </button>
-          <button className="p-2 rounded-md hover:bg-[#101622] text-gray-400">
+          <button className="p-2 rounded-md hover:bg-background-dark text-gray-400">
             <span className="material-symbols-outlined text-base">draw</span>
           </button>
         </div>
@@ -51,7 +51,7 @@ export const ChartArea = () => {
                 <p className="text-gray-400 text-base font-normal leading-normal">
                   {selectedTimeframe}
                 </p>
-                <p className="text-[#39FF14] text-base font-medium leading-normal">+0.15%</p>
+                <p className="text-accent-green text-base font-medium leading-normal">+0.15%</p>
               </div>
             </div>
             <div className="h-full w-full">

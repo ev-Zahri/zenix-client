@@ -3,7 +3,6 @@
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
 } from '@/components/ui/sheet';
@@ -87,13 +86,13 @@ export const NotificationModal = ({
   const getNotificationColor = (type: Notification['type']) => {
     switch (type) {
       case 'success':
-        return 'text-[#39FF14]';
+        return 'text-accent-green';
       case 'warning':
-        return 'text-yellow-400';
+        return 'text-accent-yellow';
       case 'error':
-        return 'text-[#FF1744]';
+        return 'text-accent-red';
       default:
-        return 'text-[#00BFFF]';
+        return 'text-accent-blue';
     }
   };
 
@@ -101,12 +100,12 @@ export const NotificationModal = ({
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetContent side="right" className="w-full sm:max-w-md bg-[#181f2d] border-[#101622] gap-0 flex flex-col">
-        <SheetHeader className="flex-row items-center justify-between gap-3 px-4 py-4 border-b border-[#101622]">
+      <SheetContent side="right" className="w-full sm:max-w-md bg-panel-dark border-background-dark gap-0 flex flex-col">
+        <SheetHeader className="flex-row items-center justify-between gap-3 px-4 py-4 border-b border-background-dark">
           <div className="flex items-center gap-3">
             <SheetTitle className="text-white">Notifications</SheetTitle>
             {unreadCount > 0 && (
-              <span className="bg-[#00BFFF] text-black text-xs font-bold px-2 py-1 rounded-full">
+              <span className="bg-accent-blue text-black text-xs font-bold px-2 py-1 rounded-full">
                 {unreadCount}
               </span>
             )}
@@ -123,12 +122,12 @@ export const NotificationModal = ({
               <p className="text-gray-400 text-sm">No notifications</p>
             </div>
           ) : (
-            <div className="divide-y divide-[#101622]">
+            <div className="divide-y divide-background-dark">
               {mockNotifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className={`p-4 hover:bg-[#101622]/50 transition-colors cursor-pointer ${
-                    !notification.read ? 'bg-[#101622]/30' : ''
+                  className={`p-4 hover:bg-background-dark/50 transition-colors cursor-pointer ${
+                    !notification.read ? 'bg-background-dark/30' : ''
                   }`}
                 >
                   <div className="flex gap-3">
@@ -145,7 +144,7 @@ export const NotificationModal = ({
                           {notification.title}
                         </h4>
                         {!notification.read && (
-                          <div className="w-2 h-2 bg-[#00BFFF] rounded-full shrink-0 mt-1.5" />
+                          <div className="w-2 h-2 bg-accent-blue rounded-full shrink-0 mt-1.5" />
                         )}
                       </div>
                       <p className="text-gray-400 text-sm mb-2 line-clamp-2">
@@ -162,9 +161,9 @@ export const NotificationModal = ({
 
         {/* Footer */}
         {mockNotifications.length > 0 && (
-          <div className="p-4 border-t border-[#101622] bg-[#181f2d] mt-0">
+          <div className="p-4 border-t border-background-dark bg-panel-dark mt-0">
             <Button
-              className="w-full bg-[#101622] hover:bg-[#101622]/80 text-white"
+              className="w-full bg-background-dark hover:bg-background-dark/80 text-white"
               onClick={() => {
                 console.log('Mark all as read');
               }}

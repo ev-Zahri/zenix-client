@@ -1,7 +1,7 @@
 'use client';
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { PlusIcon } from "lucide-react";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { SearchIcon } from "lucide-react";
 
 interface WatchlistItem {
   symbol: string;
@@ -57,14 +57,14 @@ const watchlistData: WatchlistItem[] = [
 
 export const Watchlist = () => {
   return (
-    <aside className="w-72 shrink-0 bg-[#101622] border-r border-[#181f2d] p-4 flex flex-col">
+    <aside className="w-72 shrink-0 bg-background-dark border-r border-panel-dark p-4 flex flex-col">
       <h3 className="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-2 pb-4">
         Watchlist
       </h3>
       <div className="relative w-full mb-2">
         <Input type="text" placeholder="Search" className="w-full pr-10" />
-        <button className="absolute inset-y-0 right-2 flex items-center justify-center text-gray-400 hover:text-white" aria-label="Add">
-          <PlusIcon className="w-5 h-5" />
+        <button className="absolute inset-y-0 right-2 flex items-center justify-center text-gray-400 hover:text-white cursor-pointer" aria-label="Add">
+          <SearchIcon className="w-4 h-4 mr-1" />
         </button>
       </div>
       <Select>
@@ -83,7 +83,7 @@ export const Watchlist = () => {
         {watchlistData.map((item, index) => (
           <div
             key={item.symbol}
-            className={`p-3 rounded-lg ${index === 0 ? 'bg-[#181f2d]/80' : 'hover:bg-[#181f2d]/50'} flex items-center justify-between transition-colors`}
+            className={`p-3 rounded-lg ${index === 0 ? 'bg-panel-dark/80' : 'hover:bg-panel-dark/50'} flex items-center justify-between transition-colors`}
           >
             <div className="flex flex-col">
               <span className="font-bold text-sm">{item.symbol}</span>
@@ -111,7 +111,7 @@ export const Watchlist = () => {
             <div className="flex flex-col items-end">
               <span className="font-mono font-medium text-sm">{item.price}</span>
               <span
-                className={`text-xs ${item.isPositive ? 'text-[#39FF14]' : 'text-[#FF1744]'}`}
+                className={`text-xs ${item.isPositive ? 'text-accent-green' : 'text-accent-red'}`}
               >
                 {item.change}
               </span>

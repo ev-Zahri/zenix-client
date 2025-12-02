@@ -1,26 +1,14 @@
 'use client';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { useState } from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useRouter } from 'next/navigation';
 import { useLogOut } from '@/hooks/auth';
 
-interface UserModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-}
-
-export const UserModal = ({ 
-    isOpen,
-    onClose,
-}: UserModalProps) => {
+export const UserModal = () => {
     const router = useRouter();
     const { logOut, isLoggedIn } = useLogOut();
     return (
-        <>
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 {!isLoggedIn ? (
@@ -48,6 +36,5 @@ export const UserModal = ({
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
-        </>
     )
 }

@@ -11,23 +11,23 @@ export const CandleChart = () => {
 
     const chart = createChart(chartContainerRef.current, {
       layout: {
-        background: { type: ColorType.Solid, color: '#121212' }, // Dark BG
+        background: { type: ColorType.Solid, color: 'background-dark' }, // Dark BG
         textColor: '#d1d5db',
       },
       grid: {
-        vertLines: { color: '#334155' },
-        horzLines: { color: '#334155' },
+        vertLines: { color: 'background-dark' },
+        horzLines: { color: 'background-dark' },
       },
       width: chartContainerRef.current.clientWidth,
       height: 400,
     });
 
     const newSeries = chart.addSeries(CandlestickSeries, {
-        upColor: '#22c55e', // Green Tailwind
-        downColor: '#ef4444', // Red Tailwind
+        upColor: 'accent-green', // Green Tailwind
+        downColor: 'accent-red', // Red Tailwind
         borderVisible: false, 
-        wickUpColor: '#22c55e',
-        wickDownColor: '#ef4444',
+        wickUpColor: 'accent-green',
+        wickDownColor: 'accent-red',
     });
 
     // Mock Data

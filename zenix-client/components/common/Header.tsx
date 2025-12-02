@@ -18,9 +18,9 @@ export const Header = () => {
   const router = useRouter();
   const { logOut, isLoggedIn } = useLogOut();
   return (
-    <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#181f2d] px-6 py-3 bg-[#101622] shrink-0">
+    <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-panel-dark px-6 py-3 bg-background-dark shrink-0">
       <div className="flex items-center gap-4 text-white">
-        <div className="size-6 text-[#00BFFF]">
+        <div className="size-6 text-accent-blue">
           <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
             <path d="M6 6H42L36 24L42 42H6L12 24L6 6Z" fill="currentColor" />
           </svg>
@@ -69,25 +69,25 @@ export const Header = () => {
                 </span>
               </button>
             </span>
-            <span className="font-semibold text-[#39FF14]">{hiddenEquity ? '********' : '$1,288,109.21'}</span>
+            <span className="font-semibold text-accent-green">{hiddenEquity ? '********' : '$1,288,109.21'}</span>
           </div>
         </div>
-        <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 ml-3 px-4 bg-[#00BFFF] text-black text-sm font-bold leading-normal tracking-[0.015em]" onClick={() => {
+        <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 ml-3 px-4 bg-accent-blue text-black text-sm font-bold leading-normal tracking-[0.015em]" onClick={() => {
           router.push('/deposit');
         }}>
           <span className="truncate">Deposit</span>
         </button>
         <button
-          className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#181f2d] text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-[#181f2d]/80 transition-colors relative"
+          className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-panel-dark text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-panel-dark/80 transition-colors relative"
           onClick={() => setIsNotificationOpenModal(true)}
           aria-label="Open notifications"
         >
           <span className="material-symbols-outlined text-white">notifications</span>
-          <span className="absolute top-1 right-1 w-2 h-2 bg-[#FF1744] rounded-full" />
+          <span className="absolute top-1 right-1 w-2 h-2 bg-accent-red rounded-full" />
         </button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#181f2d] text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-[#181f2d]/80 transition-colors">
+            <button className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-panel-dark text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-panel-dark/80 transition-colors">
               {isLoggedIn ? (
                 <Avatar className="h-8 w-8">
                   <AvatarImage
@@ -103,24 +103,24 @@ export const Header = () => {
               )}
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56 bg-[#181f2d] border-[#101622]">
+          <DropdownMenuContent align="end" className="w-56 bg-panel-dark border-background-dark">
             <DropdownMenuItem
               onClick={() => router.push('/profile')}
-              className="text-white hover:bg-[#101622] cursor-pointer"
+              className="text-white hover:bg-background-dark cursor-pointer"
             >
               <span className="material-symbols-outlined text-lg mr-2">person</span>
               Profile
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => router.push('/settings')}
-              className="text-white hover:bg-[#101622] cursor-pointer"
+              className="text-white hover:bg-background-dark cursor-pointer"
             >
               <span className="material-symbols-outlined text-lg mr-2">settings</span>
               Settings
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => logOut()}
-              className="text-[#FF1744] hover:bg-[#101622] cursor-pointer"
+              className="text-accent-red hover:bg-background-dark cursor-pointer"
               variant="destructive"
             >
               <span className="material-symbols-outlined text-lg mr-2">logout</span>

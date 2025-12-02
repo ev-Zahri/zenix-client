@@ -51,8 +51,8 @@ const positions: Position[] = [
 
 export const OpenPositions = () => {
   return (
-    <div className="h-1/3 bg-[#181f2d] rounded-xl flex flex-col p-4 overflow-hidden">
-      <div className="flex items-center justify-between pb-3 border-b border-[#101622]">
+    <div className="h-1/3 bg-panel-dark rounded-xl flex flex-col p-4 overflow-hidden">
+      <div className="flex items-center justify-between pb-3 border-b border-background-dark">
         <h3 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">
           Open Positions
         </h3>
@@ -62,13 +62,13 @@ export const OpenPositions = () => {
           </span>
           <span className="text-sm text-gray-400">
             Floating P/L:{' '}
-            <span className="font-semibold text-[#39FF14]">+$37,763.39</span>
+            <span className="font-semibold text-accent-green">+$37,763.39</span>
           </span>
         </div>
       </div>
       <div className="flex-1 overflow-y-auto mt-2">
         <table className="w-full text-sm text-left">
-          <thead className="text-xs text-gray-400 uppercase sticky top-0 bg-[#181f2d]">
+          <thead className="text-xs text-gray-400 uppercase sticky top-0 bg-panel-dark">
             <tr>
               <th className="px-4 py-3" scope="col">
                 Symbol
@@ -94,15 +94,15 @@ export const OpenPositions = () => {
             {positions.map((position, index) => (
               <tr
                 key={position.symbol}
-                className={`${index < positions.length - 1 ? 'border-b border-[#101622]' : ''} font-mono`}
+                className={`${index < positions.length - 1 ? 'border-b border-background-dark' : ''} font-mono`}
               >
                 <td className="px-4 py-3 font-semibold text-white">{position.symbol}</td>
                 <td className="px-4 py-3">
                   <span
                     className={`${
                       position.type === 'BUY'
-                        ? 'bg-[#39FF14]/20 text-[#39FF14]'
-                        : 'bg-[#FF1744]/20 text-[#FF1744]'
+                        ? 'bg-accent-green/20 text-accent-green'
+                        : 'bg-accent-red/20 text-accent-red'
                     } text-xs font-bold px-2 py-1 rounded`}
                   >
                     {position.type}
@@ -112,7 +112,7 @@ export const OpenPositions = () => {
                 <td className="px-4 py-3">{position.openPrice}</td>
                 <td className="px-4 py-3">{position.currentPrice}</td>
                 <td
-                  className={`px-4 py-3 ${position.isPositive ? 'text-[#39FF14]' : 'text-[#FF1744]'}`}
+                  className={`px-4 py-3 ${position.isPositive ? 'text-accent-green' : 'text-accent-red'}`}
                 >
                   {position.pnl}
                 </td>
