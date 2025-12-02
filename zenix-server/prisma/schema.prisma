@@ -1,0 +1,124 @@
+// Workflow untuk mengubah schema:
+// 1. Edit schema.prisma
+// 2. Validasi schema 
+// npx prisma validate
+// 3. Generate prisma client
+// npx prisma generate
+// 4. Cek typescript error
+// npx tsc --noEmit
+// 5. Buat migrasi
+// npx prisma migrate dev --name <nama_migrasi>
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  password  String    // Pastikan di-hash (bcrypt/argon2)
+  name      String?
+  
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deleteAt  DateTime? // Soft delete support
+
+  // Relations
+  wallet    Wallet?
+  orders    Order[]
+  transactions Transaction[] // Untuk riwayat deposit/withdraw
+}
+
+model Wallet {
+  id        String    @id @default(uuid())
+  balance   Decimal   @default(10000.00) @db.Decimal(15, 2) // Total Saldo
+  equity    Decimal   @default(10000.00) @db.Decimal(15, 2) // Saldo + Floating PnL (Opsional disimpan, atau hitung di FE)
+  currency  String    @default("USD")
+  
+  userId    String    @unique
+  user      User      @relation(fields: [userId], references: [id])
+  
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  
+  @@index([userId])
+}
+
+model Order {
+  id          String      @id @default(uuid())
+  symbol      String      // e.g. "EURUSD"
+  type        OrderType   // BUY / SELL
+  volume      Decimal     @db.Decimal(10, 2) // Lot size (e.g. 0.10, 1.00)
+  
+  // Harga
+  openPrice   Decimal     @db.Decimal(10, 5) // Harga saat buka (Forex butuh 5 desimal)
+  closePrice  Decimal?    @db.Decimal(10, 5) // Harga saat tutup (Null jika masih OPEN)
+  
+  // Manajemen Risiko (Fitur Pro)
+  sl          Decimal?    @db.Decimal(10, 5) // Stop Loss
+  tp          Decimal?    @db.Decimal(10, 5) // Take Profit
+  
+  // Hasil
+  profit      Decimal?    @db.Decimal(15, 2) // Realized PnL (Null jika masih OPEN)
+  swap        Decimal     @default(0) @db.Decimal(10, 2) // Biaya inap (opsional)
+  commission  Decimal     @default(0) @db.Decimal(10, 2) // Komisi broker
+  
+  status      OrderStatus @default(OPEN)
+  
+  userId      String
+  user        User        @relation(fields: [userId], references: [id])
+  
+  // Waktu spesifik
+  createdAt   DateTime    @default(now()) // Waktu entry
+  closedAt    DateTime?   // Waktu exit (penting untuk reporting)
+  updatedAt   DateTime    @updatedAt
+  
+  @@index([userId])
+  @@index([status]) // Agar query order aktif cepat
+}
+
+// Tambahan: Untuk mencatat Deposit/Withdraw agar balance user terlacak
+model Transaction {
+  id        String          @id @default(uuid())
+  amount    Decimal         @db.Decimal(15, 2)
+  type      TransactionType
+  status    TransactionStatus @default(COMPLETED)
+  reference String?         // ID referensi (misal Order ID atau Payment ID)
+  
+  userId    String
+  user      User            @relation(fields: [userId], references: [id])
+  
+  createdAt DateTime        @default(now())
+
+  @@index([userId])
+}
+
+enum OrderType {
+  BUY
+  SELL
+}
+
+enum OrderStatus {
+  PENDING   // Limit order (belum tereksekusi)
+  OPEN      // Sedang berjalan
+  CLOSED    // Sudah selesai
+  CANCELLED // Dibatalkan user
+}
+
+enum TransactionType {
+  DEPOSIT
+  WITHDRAWAL
+  TRADE_PROFIT // Profit masuk ke saldo
+  TRADE_LOSS   // Loss keluar dari saldo
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
