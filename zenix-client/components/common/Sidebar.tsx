@@ -12,7 +12,7 @@ const navigation = [
   { name: 'Trade', href: '/users/trade', icon: 'swap_horiz' },
   { name: 'Portfolio', href: '/users/portfolio', icon: 'pie_chart' },
   { name: 'Profile', href: '/users/profile', icon: 'person' },
-  { name: 'Reports', href: '/users/reports', icon: 'description' },
+  { name: 'Reports and Analytics', href: '/users/reports', icon: 'description' },
   { name: 'Settings and Security', href: '/users/setting', icon: 'settings' },
 ];
 
