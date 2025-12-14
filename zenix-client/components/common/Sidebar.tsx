@@ -9,7 +9,7 @@ import Image from 'next/image';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: 'dashboard' },
-  { name: 'Portfolio', href: '/users/portfolio', icon: 'pie_chart' },
+  { name: 'Portofolio', href: '/users/portofolio', icon: 'pie_chart' },
   { name: 'Profile', href: '/users/profile', icon: 'person' },
   { name: 'Reports and Analytics', href: '/users/reports', icon: 'description' },
   { name: 'Settings and Security', href: '/users/setting', icon: 'settings' },

@@ -1,8 +1,10 @@
 'use client';
 
-import { OpenPositionCard } from '@/components/users/portofolio/OpenPositionCard';
+import OpenPositionsCard from '@/components/users/portofolio/OpenPositionsCard';
+import PerformanceMetricsCard from '@/components/users/portofolio/PerformanceMetricsCard';
+import { mockUsers, mockOrders, mockTransactions, mockTradingAccounts } from '@/lib/mock';
 
-export default function ProfilePage() {
+export default function PortofolioPage() {
   return (
     <div className="py-4 md:py-6">
       <div className="mx-auto max-w-6xl">
@@ -13,7 +15,8 @@ export default function ProfilePage() {
             </p>
           </div>
         </div>
-        <OpenPositionCard></OpenPositionCard>
+        <OpenPositionsCard userId={mockUsers[0].id} orders={mockOrders} transaction={mockTransactions} />
+        <PerformanceMetricsCard userId={mockUsers[0].id} orders={mockOrders} transaction={mockTransactions} tradingAccount={mockTradingAccounts} />
       </div>
     </div>
   );
